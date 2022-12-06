@@ -1,0 +1,18 @@
+import RPi.GPIO as GPIO
+from time import sleep
+import subprocess
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(12, GPIO.IN)
+
+try:
+    while True:
+        if GPIO.input(12):
+            result = subprocess.run([sys.executable, "some.exe"])
+        else:
+            print('IO12 = LOW')
+        sleep(0.1)
+except KeyboardInterrupt:
+    GPIO.cleanup()
+
+GPIO.cleanup()
